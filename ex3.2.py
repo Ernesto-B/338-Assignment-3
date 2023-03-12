@@ -4,6 +4,22 @@ import matplotlib.pyplot as plt
 
 searchTime = []
 
+midEqual = []
+midGreater = []
+
+def totalTime (inputTime):
+    # combinding the times
+    totalTime = []
+    index = 0
+    for i in searchTime:
+        timeStamp = 0
+        for x in range(index):
+            timeStamp += inputTime[x]
+        totalTime.append(timeStamp)
+        index += 1
+    
+    return totalTime
+
 # load the array
 with open('ex3.2-array.json', 'r') as f:
     data = json.load(f)
@@ -39,19 +55,15 @@ def binary_search(array: list, search: int, start: int, end: int) -> bool:
         
         return binary_search(array, search, start, mid - 1)
     
+start = time.perf_counter()
 print(binary_search(data, int(input("What number to search for? ")), 0, len(data) - 1))
+end = time.perf_counter()
+total = end - start
+print("total time: " + str(total))
 
-# combinding the times
-totalTime = []
-index = 0
-for i in searchTime:
-    timeStamp = 0
-    for x in range(index):
-        timeStamp += searchTime[x]
-    totalTime.append(timeStamp)
-    index += 1
+allTime = totalTime(searchTime)
 
-plt.scatter(totalTime, searchTime)
+plt.scatter(allTime, searchTime)
 plt.xlabel('Time Elapsed')
 plt.ylabel('Search Time')
 plt.title('Time it took to search for input')
