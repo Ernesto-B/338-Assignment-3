@@ -28,8 +28,6 @@ def totalTime (inputTime):
     
     return totalTime
 
-startTest = time.perf_counter()
-
 for i in range(1000):
     test = testArray()
     startSearch = time.perf_counter()
@@ -37,8 +35,6 @@ for i in range(1000):
     endSearch = time.perf_counter()
 
     searchTimes.append(endSearch-startSearch)
-
-endTest = time.perf_counter()
 
 timeStamps = totalTime(searchTimes)
 
